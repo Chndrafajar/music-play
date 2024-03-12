@@ -16,6 +16,16 @@ use Inertia\Inertia;
 |
 */
 
+//role admin
+Route::get('admin', function() {
+        return 'Hi Admin';
+})->middleware('role:admin');
+
+//role user
+Route::get('user', function() {
+        return 'Hi User';
+})->middleware('role:user');
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
