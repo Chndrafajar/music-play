@@ -3,33 +3,10 @@ import Input from "@/Components/Input";
 
 import Label from "@/Components/Label";
 import ValidationError from "@/Components/ValidationError";
-import { Head, Link, useForm } from "@inertiajs/react";
-import React, { useEffect } from "react";
+import { Head, Link } from "@inertiajs/react";
+import React from "react";
 
 export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: "",
-        email: "",
-        password: "",
-        password_confirmation: "",
-    });
-
-    useEffect(() => {
-        return () => {
-            reset("password", "password_confirmation");
-        };
-    }, []);
-
-    const handleOnChange = (event) => {
-        setData(event.target.name, event.target.value);
-    };
-
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route("register"));
-    };
-
     return (
         <>
             <Head title="Register" />
@@ -44,15 +21,12 @@ export default function Register() {
                             Already have an account?{" "}
                             <Link href="/prototype/login">Login</Link>
                         </p>
-                        <ValidationError errors={errors} />
                         <form action="">
                             <div>
                                 <Label forInput="name" value="Name" />
                                 <Input
                                     type="text"
                                     name="name"
-                                    value={data.name}
-                                    handleChange={handleOnChange}
                                     placeholder="Name"
                                     isFocused={true}
                                     required
@@ -63,8 +37,6 @@ export default function Register() {
                                 <Input
                                     type="email"
                                     name="email"
-                                    value={data.email}
-                                    handleChange={handleOnChange}
                                     placeholder="Email Address"
                                     isFocused={true}
                                     required
@@ -76,8 +48,6 @@ export default function Register() {
                                 <Input
                                     type="password"
                                     name="password"
-                                    value={data.password}
-                                    handleChange={handleOnChange}
                                     placeholder="Password"
                                     isFocused={true}
                                     required
@@ -91,8 +61,6 @@ export default function Register() {
 
                                 <Input
                                     type="password"
-                                    value={data.password_confirmation}
-                                    handleChange={handleOnChange}
                                     name="password_confirmation"
                                     placeholder="Password Confirmation"
                                     isFocused={true}

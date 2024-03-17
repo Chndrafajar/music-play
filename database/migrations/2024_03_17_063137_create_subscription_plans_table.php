@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_subscriptions', function (Blueprint $table) {
+        Schema::create('subscription_plans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('subscription_plan_id');
+            $table->string('name');
             $table->unsignedInteger('price');
-            $table->dateTime('expired_date')->nullable();
-            $table->string('payment_status', 10)->default('pending');
-            $table->string('snap_token', 10)->nullable();
+            $table->unsignedSmallInteger('active_period_in_months');
+            $table->json('features');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_subscriptions');
+        Schema::dropIfExists('subscription_plans');
     }
 };
